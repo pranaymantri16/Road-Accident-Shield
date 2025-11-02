@@ -1,86 +1,163 @@
-# ROAD-ACCIDENTS-PREDICTION-AND-CLASSIFICATION
-Final Year Project on Road Accident Prediction using user's Location,weather conditions by applying machine Learning concepts.
+🛣️ Road Accident Shield
 
-# DataSet
-https://github.com/abdulwahed786/final-yr-projectqA
+Accident Severity Prediction and Classification using Machine Learning
 
-# To Run 
-` python main.py `
+📘 Overview
 
-# ML algorithms 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67921930-4c64fe80-fbcf-11e9-9b87-c3225daad396.png">
-</p>
+Road Accident Shield is a machine learning–powered system designed to analyze, predict, and classify accident severity based on real-world traffic and environmental data.
+It uses Python, Scikit-Learn, and Flask to train predictive models and provide an interactive web interface for real-time accident severity prediction.
 
-# VM 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922038-8a622280-fbcf-11e9-828a-22fb0abd35b1.png">
-</p>
+🎯 Objectives
 
-Fig 4.6 Azure VM page
+Analyze key factors contributing to road accidents.
 
-Virtual Machine deployed on Azure.
+Build an ML model to predict the severity of an accident (Slight, Serious, or Fatal).
 
-We have chosen Random Forest as our model as it has the highest accuracy (86.86%).
+Deploy the model as a Flask web app for user interaction.
 
-Input taken from user is sent to the backend flask server which feeds the parameters to the ML model and returns the result. It also sends a message to the police to take preventive measures.
+Provide insights that help reduce accident risks and support traffic authorities.
 
-**RESULTS AND DISCUSSIONS**
+🧠 Machine Learning Workflow
+1. Data Sources
 
+The project uses real UK accident datasets:
 
-**Figure 4.1** User page
+accidentsBig.csv – accident details (time, weather, road type, etc.)
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922275-56d3c800-fbd0-11e9-969c-ce6452b6d6a6.png">
-</p>
+vehiclesBig.csv – vehicle data (type, maneuver, impact)
 
-The above figure 4.1 shows the home page of the web app. The web domain is secured with HTTPS wich has been obtained from the certificate authority for secure data transfer and to be able to use the Geolocation API. Displays the data owner login web page, which allows data owner to login and also to register, if the user does not have existing account.
+casualtiesBig.csv – injury and casualty information
+These are merged into combined_balanced_3000.csv for training.
 
+2. Data Preprocessing
 
-**Figure 4.2** User Location by GPS
+Dropping irrelevant or missing fields
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922304-681cd480-fbd0-11e9-8eb5-d8649e4d995c.png">
-</p>
+Combining date and time into a single datetime column
 
-shows that when user clicks on update coordinates button, the web page requests the browser to take user coordinates. In the backend flask module, GeoLocation API is used to get location of the user. Ajax is used to update the latitude and longitude of the user in the web page.
+Handling -1 (unknown) values
 
-The coordinates are sent to the OpenWeatherMap Api in the backend for the weather details. From the response we extract the details we require such as weather , road and light conditions.
+Encoding categorical features using LabelEncoder
 
-Day of the week is updated with the getDate function of javascript.
+Normalizing features using StandardScaler
 
-**Figure 4.9** User input for other parameters
+Balancing dataset using SMOTE (Synthetic Minority Oversampling Technique)
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922808-e3cb5100-fbd1-11e9-9497-850fcf4061e0.png">
-</p>
+3. Model Training
 
-Figure 4.9shows the input for parameters taken from users. These include the vehicle type, age gender and speed limit.
+Multiple models were tested:
 
-**Figure 4.10** Output Predicted
+Random Forest Classifier (best performing)
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922809-e463e780-fbd1-11e9-8eba-062a6662970c.png">
-</p>
+Logistic Regression
 
-Figure 4.10shows all the data of the user. When the user clicks on Predict, that data is sent to the backend from where it is feeded into our chosen machine learning algorithm which is Random Forest. The output predicted is on the following basis of severity as 1- Fatal, 2- Severe, 3-Slight.
+Decision Tree Classifier
 
-**Figure 4.11** Click on sms button
+The trained Random Forest model achieved high accuracy and was saved as accident_severity_model.sav.
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922806-e3cb5100-fbd1-11e9-884e-a89ef1bd4931.png">
-</p>
+4. Evaluation
 
-In this Figure 4.11 an sms is sent to the police with location details and severity.  The TextLocal Api gives us 10 free messages to be sent every day.
+Metrics used:
 
-**Figure 4.12** Map
+Accuracy Score
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922828-ecbc2280-fbd1-11e9-995b-1a9be5e3095c.png">
-</p>
+Confusion Matrix
 
-In the Figure 4.12 This web page displays an interactive heat map for users. Darker points mean greater severity. The gmaps api is used to plot on google maps.
+Precision, Recall, F1-Score
 
-<p align="center">
-  <img width="460" height="300" src="https://user-images.githubusercontent.com/29819481/67922828-ecbc2280-fbd1-11e9-995b-1a9be5e3095c.png">
-</p>
+🧰 Tech Stack
+Component	Technology Used
+Language	Python 3
+Libraries	pandas, numpy, scikit-learn, pickle, flask
+Frontend	HTML, CSS (in templates/ and static/)
+Backend	Flask
+Visualization	Matplotlib, Seaborn
+Deployment	Localhost / Render / Railway
+🖥️ Flask Web Application
+Key Files
+
+main.py → Flask application file
+
+templates/index.html → Main UI for user input
+
+static/index.css → Styling for the interface
+
+litemodel.sav, scaler.pkl → ML model & normalization scaler
+
+Features
+
+User inputs factors like Weather, Light, Road Type, Vehicle Type, etc.
+
+The app predicts accident severity instantly.
+
+Option to visualize and export data reports.
+
+Run Instructions
+# 1. Clone the repository
+git clone https://github.com/pranaymantri16/Road-Accident-Shield.git
+cd Road-Accident-Shield
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run Flask app
+python main.py
+
+# 4. Open in browser
+http://127.0.0.1:5000/
+
+📊 Model Files
+File	Description
+accident_severity_model.sav	Trained Random Forest model
+litemodel.sav / litemodel_new.sav	Lightweight models for deployment
+scaler.pkl	Feature scaling object
+combined_balanced_3000.csv	Preprocessed dataset used for model training
+🧩 System Architecture
++------------------------+
+| Raw Accident Datasets  |
++-----------+------------+
+            |
+            ▼
++------------------------+
+| Data Cleaning & Merge  |
++-----------+------------+
+            |
+            ▼
++------------------------+
+| Feature Engineering    |
++-----------+------------+
+            |
+            ▼
++------------------------+
+| Model Training (RF)    |
++-----------+------------+
+            |
+            ▼
++------------------------+
+| Flask Web Interface    |
++------------------------+
+
+📈 Results
+
+Model Accuracy: ~87%
+
+Random Forest performed best among tested models.
+
+Key influencing factors: Weather, Road Surface, Light Conditions, Vehicle Type.
+
+🧑‍💻 Authors
+
+Pranay Mantri
+Guided by: Dr. Amit Pimpalkar
+Department of Computer Engineering
+RCOEM
+
+💬 Future Scope
+
+Integration with real-time traffic APIs.
+
+Accident hotspot visualization using Google Maps API.
+
+Advanced deep learning models for higher accuracy.
+
+Mobile-friendly dashboard and alert system.
