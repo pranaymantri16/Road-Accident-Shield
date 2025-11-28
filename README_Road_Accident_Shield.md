@@ -142,7 +142,7 @@ http://127.0.0.1:5000/
 ## 🧑‍💻 Authors
 **Pranay Mantri**  
 Guided by: *Dr. Amit Pimpalkar*  
-Department of Computer Engineering  
+Department of Computer Science and Engineering  
 RCOEM
 
 ---
